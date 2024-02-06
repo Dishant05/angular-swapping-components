@@ -1,0 +1,68 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+      <form (ngSubmit)="onSubmit()" [formGroup]="form">
+        <div class="form-group">
+          <label for="name">Name :</label>
+          <input
+            type="text"
+            id="name"
+            class="form-control"
+            formControlName="name"
+          />
+        </div>
+        <div
+          formArrayName="emails"
+          style="margin-bottom: 30px"
+          class="col-xs-10"
+        >
+          <label for="emails" style="margin-right: 15px; margin-top: 20px"
+            >Email</label
+          >
+          <button class="btn btn-dark" type="button" (click)="onAddEmail()">
+            Add Email
+          </button>
+          <div
+            class="form-group"
+            *ngFor="let control of controls; let i = index"
+          >
+            <div class="col-xs-8">
+              <input
+                style="margin-top: 15px"
+                type="text"
+                class="form-control"
+                [formControlName]="i"
+              />
+            </div>
+            <div class="col-xs-2">
+              <button
+                type="button"
+                class="btn btn-danger"
+                (click)="deleteEmail(i)"
+              >
+                X
+              </button>
+            </div>
+          </div>
+        </div>
+        <div
+          class="radio"
+          *ngFor="let team of teams"
+          style="margin-bottom: 10px"
+        >
+          <label>
+            <input type="radio" [value]="team" formControlName="team" />
+            Team {{ team }}
+          </label>
+        </div>
+        <button
+          type="submit"
+          class="btn btn-info"
+          [disabled]="!form.valid && form.touched"
+        >
+          Submit
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
