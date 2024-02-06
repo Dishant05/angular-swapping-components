@@ -1,4 +1,5 @@
 .list-group-item {
   border-top: #dee2e6 1px solid;
   margin-bottom: 15px;
+  cursor: pointer;
 }

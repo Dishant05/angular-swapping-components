@@ -1,6 +1,7 @@
 <div class="row mx-md-n5 mt-5" style="width: 1200px; margin: 0 auto; gap: 10px">
   <div class="col px-md-3">
     <div class="p-3 border bg-light">
+      <p *ngIf="teamAStudents.length === 0">No students in Team A</p>
       <ul class="list-group" #itemA>
         <li
           class="list-group-item"
@@ -116,6 +117,7 @@
   </div>
   <div class="col px-md-3">
     <div class="p-3 border bg-light">
+      <p *ngIf="teamBStudents.length === 0">No students in Team B</p>
       <ul class="list-group" #itemB>
         <li
           class="list-group-item"

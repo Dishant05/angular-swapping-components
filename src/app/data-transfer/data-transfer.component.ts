@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { DataModel } from './data.model';
+import { DataModel, teamType } from './data.model';
 import { DataService } from '../data-service';
 
 @Component({
@@ -12,7 +12,7 @@ export class DataTransferComponent implements OnInit {
   teamBStudents: DataModel[];
   @ViewChild('itemA') teamAElement: ElementRef;
   @ViewChild('itemB') teamBElement: ElementRef;
-  click: 'A' | 'B';
+  click: teamType;
 
   constructor(private dataService: DataService) {
     this.dataService.clickedOn.subscribe((click) => {
@@ -25,7 +25,7 @@ export class DataTransferComponent implements OnInit {
     this.teamBStudents = this.dataService.teamBStudents;
   }
 
-  transferOnClick(team: 'A' | 'B') {
+  transferOnClick(team: teamType) {
     this.dataService.clickedOn.next(null);
     if (team === 'A') {
       this.dataService.transferV2('A');
@@ -60,7 +60,7 @@ export class DataTransferComponent implements OnInit {
     //   );
   }
 
-  transferAllOnClick(team: 'A' | 'B') {
+  transferAllOnClick(team: teamType) {
     this.dataService.clickedOn.next(null);
     if (team === 'A') {
       // console.log(this.dataService.teamAStudents[0]);

@@ -7,6 +7,7 @@ import {
   OnInit,
 } from '@angular/core';
 import { DataService } from '../data-service';
+import { teamType } from './data.model';
 
 @Directive({
   selector: '[select]',
@@ -14,16 +15,14 @@ import { DataService } from '../data-service';
 export class SelectDirective implements OnInit {
   @Input() id: string;
   @Input() index: number;
-  @Input() team: 'A' | 'B';
-  click: 'A' | 'B' = null;
+  @Input() team: teamType;
+  click: teamType = null;
   constructor(private dataService: DataService, private elRef: ElementRef) {}
 
   @HostListener('click') onClick() {
     let elementClass = this.elRef.nativeElement.classList;
     this.dataService.selectedOrNotSelected(this.id, this.team);
     // this.dataService.transfer(this.id);
-
-    console.log(this.dataService.teamAStudents);
 
     if (this.team === 'A') {
       console.log();
