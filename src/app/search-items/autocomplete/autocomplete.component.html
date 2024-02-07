@@ -1,0 +1,54 @@
+<!-- <input
+  id="nameSearch"
+  #studentNameSearchInput
+  placeholder="Search Student by Name"
+  type="text"
+  autocomplete="off"
+  (input)="search()"
+  (click)="showSearches = true"
+/> -->
+<!-- <div class="card" [hidden]="!showSearches">
+  <div class="search">
+    <div *ngFor="let name of searchedNames" tappable class="search-result">
+      {{ name }}
+    </div>
+  </div>
+</div> -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light position: relative">
+  <form class="form-inline my-2 my-lg-0" style="display: flex; gap: 15px">
+    <input
+      class="form-control mr-sm-2"
+      type="search"
+      placeholder="Search"
+      aria-label="Search"
+      (input)="search()"
+      (click)="showSearches = true"
+      #studentNameSearchInput
+    />
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+      Search
+    </button>
+  </form>
+  <div
+    style="position: absolute; width: 70%; top: 46px"
+    [hidden]="!showSearches"
+  >
+    <div
+      *ngFor="let name of searchedNames"
+      class="form-control mr-sm-2 searchOptions"
+      type="search"
+      style="cursor: pointer"
+    >
+      <li style="list-style-type: none">
+        {{ name }}
+      </li>
+    </div>
+    <div
+      *ngIf="!searching && searchedNames.length === 0"
+      class="form-control mr-sm-2"
+      type="search"
+    >
+      No results found
+    </div>
+  </div>
+</nav>

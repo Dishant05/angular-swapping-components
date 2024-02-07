@@ -3,6 +3,7 @@ import { DataTransferComponent } from './data-transfer/data-transfer.component';
 import { FormComponent } from './form/form.component';
 
 import { NgModule } from '@angular/core';
+import { SearchItemsComponent } from './search-items/search-items.component';
 
 const routes: Routes = [
   // {
@@ -21,6 +22,10 @@ const routes: Routes = [
   {
     path: 'edit/:id/:team',
     component: FormComponent,
+  },
+  {
+    path: 'search-items',
+    component: SearchItemsComponent,
   },
   {
     path: '**',

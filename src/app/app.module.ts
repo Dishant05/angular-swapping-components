@@ -11,6 +11,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { SearchItemsComponent } from './search-items/search-items.component';
+import { AutocompleteComponent } from './search-items/autocomplete/autocomplete.component';
+import { FilterComponent } from './search-items/filter/filter.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +21,9 @@ import { MatIconModule } from '@angular/material/icon';
     FormComponent,
     DataTransferComponent,
     SelectDirective,
+    SearchItemsComponent,
+    AutocompleteComponent,
+    FilterComponent,
   ],
   imports: [
     BrowserModule,
