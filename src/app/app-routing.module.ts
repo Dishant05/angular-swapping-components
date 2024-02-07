@@ -19,6 +19,10 @@ const routes: Routes = [
     component: FormComponent,
   },
   {
+    path: 'edit/:id/:team',
+    component: FormComponent,
+  },
+  {
     path: '**',
     redirectTo: 'data',
   },

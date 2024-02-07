@@ -10,6 +10,7 @@
           [team]="student.team"
           *ngFor="let student of teamAStudents; let index = index"
           select
+          style="position: relative"
         >
           <div class="media text-muted pt-3">
             <p class="mr-2 rounded" style="height: 16px">
@@ -27,6 +28,17 @@
                 <p *ngFor="let email of student.emails">{{ email }}</p>
               </div>
             </div>
+          </div>
+          <div class="item-buttons-group">
+            <button mat-icon-button (click)="onEdit(student.id, student.team)">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <button
+              mat-icon-button
+              (click)="onDelete(student.id, student.team)"
+            >
+              <mat-icon>delete</mat-icon>
+            </button>
           </div>
         </li>
       </ul>
@@ -143,6 +155,17 @@
                 <p *ngFor="let email of student.emails">{{ email }}</p>
               </div>
             </div>
+          </div>
+          <div class="item-buttons-group">
+            <button mat-icon-button (click)="onEdit(student.id, student.team)">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <button
+              mat-icon-button
+              (click)="onDelete(student.id, student.team)"
+            >
+              <mat-icon>delete</mat-icon>
+            </button>
           </div>
         </li>
       </ul>

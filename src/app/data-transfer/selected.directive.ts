@@ -19,7 +19,15 @@ export class SelectDirective implements OnInit {
   click: teamType = null;
   constructor(private dataService: DataService, private elRef: ElementRef) {}
 
-  @HostListener('click') onClick() {
+  @HostListener('click', ['$event']) onClick(e) {
+    // if (e.target.classList.contains('item-buttons-group')) {
+    //   console.log(e.target);
+    //   return;
+    // }
+
+    if (e.target.closest('div').classList.contains('item-buttons-group'))
+      return;
+
     let elementClass = this.elRef.nativeElement.classList;
     this.dataService.selectedOrNotSelected(this.id, this.team);
     // this.dataService.transfer(this.id);

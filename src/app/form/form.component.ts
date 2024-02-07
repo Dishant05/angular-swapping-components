@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DataService } from '../data-service';
+import { teamType } from '../data-transfer/data.model';
 
 @Component({
   selector: 'app-form',
@@ -11,8 +12,14 @@ import { DataService } from '../data-service';
 export class FormComponent implements OnInit {
   form: FormGroup;
   teams = ['A', 'B'];
+  id: string = null;
+  team: teamType;
 
-  constructor(private router: Router, private dataService: DataService) {}
+  constructor(
+    private router: Router,
+    private dataService: DataService,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
     this.form = new FormGroup({
@@ -21,11 +28,49 @@ export class FormComponent implements OnInit {
       team: new FormControl('', Validators.required),
       hobby: new FormControl(null),
     });
+
+    if (this.route.snapshot.params['id']) {
+      this.id = this.route.snapshot.params['id'];
+      this.team = this.route.snapshot.params['team'];
+      this.patchValues();
+    }
+  }
+
+  patchValues() {
+    let student = this.dataService.getStudentById(this.id, this.team);
+    console.log(student);
+    this.form.patchValue(student);
+    const emailPattern: RegExp =
+      /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+
+    // student.emails.forEach((email) => {
+    //   (<FormArray>this.form.get('emails')).controls.push(
+    //     new FormControl(email, [
+    //       Validators.required,
+    //       Validators.pattern(emailPattern),
+    //     ])
+    //   );
+    // });
+
+    for (let email of student.emails) {
+      (<FormArray>this.form.get('emails')).push(
+        new FormControl(email, [
+          Validators.required,
+          Validators.pattern(emailPattern),
+        ])
+      );
+    }
   }
 
   onSubmit() {
-    console.log(this.form);
     if (this.form.valid) {
+      if (this.dataService.getStudentById(this.id, this.team)) {
+        this.dataService.editStudent(this.id, this.form.value);
+        console.log(this.form.value);
+        this.router.navigate(['/data']);
+        return;
+      }
+
       this.dataService.addStudent({
         ...this.form.value,
         id: Math.random().toString(16).slice(5),
@@ -66,10 +111,9 @@ export class FormComponent implements OnInit {
   checkHobbyRequired(e) {
     if (e.target.checked) {
       this.form.get('hobby').setValidators([Validators.required]);
-      this.form.get('hobby').updateValueAndValidity();
     } else {
       this.form.get('hobby').setValidators(null);
-      this.form.get('hobby').updateValueAndValidity();
     }
+    this.form.get('hobby').updateValueAndValidity();
   }
 }

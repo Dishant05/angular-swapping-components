@@ -3,3 +3,14 @@
   margin-bottom: 15px;
   cursor: pointer;
 }
+
+.item-buttons-group {
+  position: absolute;
+  top: 2px;
+  right: 10px;
+  display: none;
+}
+
+.list-group-item:hover .item-buttons-group {
+  display: block;
+}

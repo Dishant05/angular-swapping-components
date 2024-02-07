@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { DataModel, teamType } from './data.model';
 import { DataService } from '../data-service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-data-transfer',
@@ -14,7 +15,7 @@ export class DataTransferComponent implements OnInit {
   @ViewChild('itemB') teamBElement: ElementRef;
   click: teamType;
 
-  constructor(private dataService: DataService) {
+  constructor(private dataService: DataService, private router: Router) {
     this.dataService.clickedOn.subscribe((click) => {
       this.click = click;
     });
@@ -85,5 +86,13 @@ export class DataTransferComponent implements OnInit {
         this.dataService.teamBStudents.length
       );
     }
+  }
+
+  onEdit(id: string, team: teamType) {
+    this.router.navigate(['/edit', id, team]);
+  }
+
+  onDelete(id: string, team: teamType) {
+    this.dataService.deleteStudentById(id, team);
   }
 }

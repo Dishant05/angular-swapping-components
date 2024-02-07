@@ -6,4 +6,5 @@ export interface DataModel {
   emails: string[];
   selected: boolean;
   team: teamType;
+  hobby: string;
 }
