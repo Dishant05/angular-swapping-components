@@ -1,1 +1,41 @@
-<p>filter works!</p>
+<div class="row mx-md-n5 mt-5" style="width: 600px; margin: 0 auto; gap: 10px">
+  <div class="col px-md-3">
+    <div class="p-3 border bg-light">
+      <ul class="list-group" #itemA>
+        <p *ngIf="!filterString; else display">No items searched for Yet</p>
+        <ng-template #display>
+          <li
+            class="list-group-item"
+            *ngFor="
+              let student of displayStudents | filter : filterString : 'name'
+            "
+            select
+            style="position: relative"
+          >
+            <div class="media text-muted pt-3">
+              <p class="mr-2 rounded" style="height: 16px">
+                ID: {{ student.id }}
+              </p>
+              <div style="display: flex; gap: 25px">
+                <p class="media-body pb-3 mb-0 small lh-125 border-gray">
+                  Name
+                </p>
+                <p>{{ student.name }}</p>
+              </div>
+              <div class="email row">
+                <p
+                  class="col-sm-2 media-body pb-3 mb-0 small lh-125 border-gray"
+                >
+                  Email:
+                </p>
+                <div class="col-sm-10">
+                  <p *ngFor="let email of student.emails">{{ email }}</p>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ng-template>
+      </ul>
+    </div>
+  </div>
+</div>

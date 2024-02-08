@@ -14,6 +14,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { SearchItemsComponent } from './search-items/search-items.component';
 import { AutocompleteComponent } from './search-items/autocomplete/autocomplete.component';
 import { FilterComponent } from './search-items/filter/filter.component';
+import { FilterPipe } from './search-items/filter.pipe';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { FilterComponent } from './search-items/filter/filter.component';
     SearchItemsComponent,
     AutocompleteComponent,
     FilterComponent,
+    FilterPipe,
   ],
   imports: [
     BrowserModule,

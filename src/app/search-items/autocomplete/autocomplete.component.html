@@ -14,41 +14,55 @@
     </div>
   </div>
 </div> -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light position: relative">
-  <form class="form-inline my-2 my-lg-0" style="display: flex; gap: 15px">
-    <input
-      class="form-control mr-sm-2"
-      type="search"
-      placeholder="Search"
-      aria-label="Search"
-      (input)="search()"
-      (click)="showSearches = true"
-      #studentNameSearchInput
-    />
-    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
-      Search
-    </button>
-  </form>
+<div
+  class="row mx-md-n5 mt-5"
+  style="width: 1500px; margin: 0 auto; gap: 10px"
+  (click)="hideOrShowSearches($event)"
+>
   <div
-    style="position: absolute; width: 70%; top: 46px"
-    [hidden]="!showSearches"
+    class="col px-md-3"
+    style="display: flex; flex-direction: column; align-items: center"
   >
-    <div
-      *ngFor="let name of searchedNames"
-      class="form-control mr-sm-2 searchOptions"
-      type="search"
-      style="cursor: pointer"
+    <nav
+      class="navbar navbar-expand-lg navbar-light bg-light position: relative"
     >
-      <li style="list-style-type: none">
-        {{ name }}
-      </li>
-    </div>
-    <div
-      *ngIf="!searching && searchedNames.length === 0"
-      class="form-control mr-sm-2"
-      type="search"
-    >
-      No results found
-    </div>
+      <form class="form-inline my-2 my-lg-0" style="display: flex; gap: 15px">
+        <input
+          class="form-control mr-sm-2 searchBar"
+          type="search"
+          placeholder="Search"
+          aria-label="Search"
+          (keyup)="search($event)"
+          (click)="showSearches = true"
+          #studentNameSearchInput
+        />
+        <button class="btn btn-outline-success my-2 my-sm-0" type="button" (click)="toFilter()">
+          Search
+        </button>
+      </form>
+      <div
+        style="position: absolute; width: 70%; top: 46px; z-index: 2"
+        [hidden]="!showSearches"
+      >
+        <div
+          *ngFor="let name of searchedNames"
+          class="form-control mr-sm-2 searchOptions"
+          type="search"
+          style="cursor: pointer"
+          (click)="toSelect(name)"
+        >
+          <li style="list-style-type: none">
+            {{ name }}
+          </li>
+        </div>
+        <div
+          *ngIf="!searching && searchedNames.length === 0"
+          class="form-control mr-sm-2"
+          type="search"
+        >
+          No results found
+        </div>
+      </div>
+    </nav>
   </div>
-</nav>
+</div>
